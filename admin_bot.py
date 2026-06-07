@@ -38,6 +38,7 @@ def get_admin_keyboard():
     markup.row("👥 Qiziquvchilar", "📦 Setlar ro'yxati")
     markup.row("📦 Set qo'shish", "📅 Obuna ma'lumotini tahrirlash")
     markup.row("📢 Xabar yuborish", "🍽️ Bugungi taom")
+    markup.row("👥 Barcha userlarni olish")
     return markup
 
 def get_cancel_keyboard():
@@ -120,8 +121,6 @@ def handle_start(message):
     welcome_text = "Assalomu aleykum Taomchi Set admin botiga xush kelibsiz! 🛠️\n\nBu yerda buyurtmalarni qabul qilishingiz va sozlamalarni boshqarishingiz mumkin."
     bot.send_message(chat_id, welcome_text, reply_markup=get_admin_keyboard())
 
-@bot.message_handler(func=lambda msg: msg.text == "❌ Bekor qilish")
-def handle_cancel(message):
     chat_id = message.chat.id
     admin_steps[chat_id] = None
     if chat_id in admin_data:
@@ -139,6 +138,24 @@ def handle_stats(message):
     )
     bot.send_message(message.chat.id, stats_text, parse_mode="Markdown")
 
+@bot.message_handler(func=lambda msg: msg.text == "👥 Barcha userlarni olish")
+def handle_get_all_users(message):
+    users = database.get_all_users()
+
+    if not users:
+        bot.send_message(message.chat.id, "Hozircha foydalanuvchilar yo'q.")
+        return
+
+    users_text = "👥 *Barcha foydalanuvchilar:*\n\n"
+
+    for user in users:
+        users_text += f"👤 {user['username']}\n"
+
+    bot.send_message(
+        message.chat.id,
+        users_text,
+        parse_mode="Markdown"
+    )
 @bot.message_handler(func=lambda msg: msg.text == "📦 Faol buyurtmalar")
 def handle_active_orders(message):
     chat_id = message.chat.id
