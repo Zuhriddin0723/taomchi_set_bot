@@ -313,6 +313,15 @@ def get_user(chat_id):
     conn.close()
     return row
 
+def get_all_users():
+    """Barcha foydalanuvchilarni ro'yxatini qaytaradi."""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users ORDER BY registered_at DESC")
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
 def add_interest(user_id, query_type, item_name=None):
     conn = get_connection()
     cursor = conn.cursor()
