@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Telegram Bot API Tokenlar
-USER_BOT_TOKEN = os.getenv("USER_BOT_TOKEN", "8940547653:AAEgzuIau1ddD2zdoQr2paqxZfqCT_b3WPM")
-ADMIN_BOT_TOKEN = os.getenv("ADMIN_BOT_TOKEN", "8642922312:AAEEALRh1Y_2raYMyh_u1oJ5SWbXNnWV5x8")
+USER_BOT_TOKEN = os.getenv("USER_BOT_TOKEN", "8940547653:AAGGB0aZ9VORt9xFvjFfltVXYCzWTZl6Yk0")
+ADMIN_BOT_TOKEN = os.getenv("ADMIN_BOT_TOKEN", "8642922312:AAGoWTs6HHdHhN_f8d5L63MOw9uNhyQs2NE")
 
 # Database Configuration
 DB_NAME = os.getenv("DB_NAME", "database.db")
